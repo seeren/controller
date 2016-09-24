@@ -1,0 +1,36 @@
+{
+    "name": "seeren/controller",
+    "description": "Controllers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Cyril Ichti",
+        "email": "consultant@seeren.fr",
+        "homepage" : "http://www.seeren.fr"
+      }
+    ],
+    "repositories": [
+      {
+         "type": "vcs",
+         "url": "vendor/seeren/src/view"
+      },
+      {
+         "type": "vcs",
+         "url": "vendor/seeren/src/model"
+      }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=7.0.1",
+      "psr/http-message": "~1.0",
+      "seeren/view ": "~1.0",
+      "seerem/model": "~1.0"
+    },
+    "autoload": {
+      "psr-4": {
+		"Seeren\\Controller\\": "src/",
+		"Seeren\\Controller\\Test\\": "test/"
+      }
+  }
+}
