@@ -24,7 +24,7 @@
     "require": {
       "php": ">=7.0.1",
       "psr/http-message": "~1.0",
-      "seeren/view ": "*",
+      "seeren/view": "*",
       "seerem/model": "*"
     },
     "autoload": {
