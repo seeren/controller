@@ -33,7 +33,7 @@ interface HttpControllerInterface extends ControllerInterface
      * @return string
      *
      * @throws BadMethodCallException
-     * @throws RuntimeExceptionr
+     * @throws RuntimeException
      */
     public function execute(): string;
 
