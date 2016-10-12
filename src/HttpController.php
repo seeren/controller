@@ -27,9 +27,8 @@ use RuntimeException;
  * 
  * @category Seeren
  * @package Controller
- * @abstract
  */
-abstract class HttpController extends Controller
+class HttpController extends Controller
 {
 
    protected
@@ -70,16 +69,18 @@ abstract class HttpController extends Controller
     * @throws BadMethodCallException
     * @throws RuntimeExceptionr
     */
-   public function execute(): string
+   public final function execute(): string
     {
        try {
-           $this->__call($this->request->getAttribute("action", "get"));
+           $this->__call($this->request->getAttribute("action"));
            return $this->view->render();
        } catch (BadMethodCallException $e) {
-           $this->response = $this->response->withStatus(500);
+           $this->response = $this->response->withStatus(405);
            throw $e;
        } catch (Throwable $e) {
-           throw new RuntimeException("Can't execute: " . $e->getMessage());
+           $this->response = $this->response->withStatus(500);
+           throw new RuntimeException(
+               "Can't execute " . static::class . ": " . $e->getMessage());
        }
     }
 

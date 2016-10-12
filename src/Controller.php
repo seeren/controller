@@ -47,7 +47,7 @@ abstract class Controller
     * @param ViewInterface $view view
     * @return null
     */
-   public function __construct(
+   protected function __construct(
        ModelInterface $model,
        ViewInterface $view)
    {
@@ -65,7 +65,7 @@ abstract class Controller
     *
     * @throws BadMethodCallException if method not exists|not protected
     */
-   public function __call(string $name, array $arguments = [])
+   public final function __call(string $name, array $arguments = [])
    {
        if (!method_exists($this, $name)) {
            throw new BadMethodCallException(
@@ -75,7 +75,7 @@ abstract class Controller
        if (!(new ReflectionMethod($this, $name))->isProtected()) {
            throw new BadMethodCallException(
                "Can't call " . static::class . "::" . $name
-             . " must be protected");
+             . " have to be protected");
        }
        $this->{$name}(...$arguments);
    }

@@ -17,6 +17,7 @@ namespace Seeren\Controller;
 
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
+
 /**
  * Interface for represente controller
  * 
