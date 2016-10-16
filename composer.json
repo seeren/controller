@@ -23,5 +23,5 @@
 		"Seeren\\Controller\\": "src/",
 		"Seeren\\Controller\\Test\\": "test/"
       }
-  }
+   }
 }
