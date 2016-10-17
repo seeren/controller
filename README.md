@@ -18,13 +18,13 @@ $controller = new HttpController(
         new View);
 ```
 
-Controllers have to be dispatcher and their construction resolved.
+They have to be dispatched and their construction resolved.
 
 ```php
 $controller = $container->get("mycontroller");
 ```
 
-Http controllers can only be executer for Request::getAttribute value of action attribute.
+Http controllers can only be executed for Request::getAttribute value of action attribute.
 
 ```php
 try {
@@ -45,7 +45,3 @@ Running tests with phpunit in the test folder.
 ```
 $ phpunit test/HttpControllerTest.php
 ```
-
-#### License
-
-[MIT](https://github.com/Seeren/Seeren/blob/master/LICENSE)
