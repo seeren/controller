@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 namespace Seeren\Controller;
@@ -19,6 +19,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
+use Seeren\Model\Exception\ModelException;
 use BadMethodCallException;
 use RuntimeException;
 
@@ -76,6 +77,9 @@ class HttpController extends Controller implements HttpControllerInterface
            return $this->view->render();
        } catch (BadMethodCallException $e) {
            $this->response = $this->response->withStatus(405);
+           throw $e;
+       } catch (ModelException $e) {
+           $this->response = $this->response->withStatus(404);
            throw $e;
        } catch (Throwable $e) {
            $this->response = $this->response->withStatus(500);
