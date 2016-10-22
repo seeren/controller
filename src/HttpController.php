@@ -68,23 +68,21 @@ class HttpController extends Controller implements HttpControllerInterface
     * @return string
     *
     * @throws BadMethodCallException
-    * @throws RuntimeException
     */
    public final function execute(): string
     {
        try {
+           $body = "";
            $this->__call($this->request->getAttribute("action", ""));
-           return $this->view->render();
+           $body .= $this->view->render();
        } catch (BadMethodCallException $e) {
            $this->response = $this->response->withStatus(405);
-           throw $e;
        } catch (ModelException $e) {
            $this->response = $this->response->withStatus(404);
-           throw $e;
        } catch (Throwable $e) {
            $this->response = $this->response->withStatus(500);
-           throw new RuntimeException(
-               "Can't execute " . static::class . ": " . $e->getMessage());
+       } finally {
+           return $body;
        }
     }
 
