@@ -21,7 +21,7 @@ use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\Model\Exception\ModelException;
 use BadMethodCallException;
-use RuntimeException;
+use Throwable;
 
 /**
  * Class for represente http controller
@@ -66,8 +66,6 @@ class HttpController extends Controller implements HttpControllerInterface
     * Execute controller
     *
     * @return string
-    *
-    * @throws BadMethodCallException
     */
    public final function execute(): string
     {
