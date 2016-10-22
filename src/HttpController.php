@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 namespace Seeren\Controller;
@@ -21,6 +21,7 @@ use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\Model\Exception\ModelException;
 use BadMethodCallException;
+use RuntimeException;
 use Throwable;
 
 /**
@@ -66,22 +67,26 @@ class HttpController extends Controller implements HttpControllerInterface
     * Execute controller
     *
     * @return string
+    * 
+    * @throws RuntimeException on faillure
     */
    public final function execute(): string
     {
+       $body = "";
        try {
-           $body = "";
            $this->__call($this->request->getAttribute("action", ""));
-           $body .= $this->view->render();
+           $body = $this->view->render();
        } catch (BadMethodCallException $e) {
            $this->response = $this->response->withStatus(405);
        } catch (ModelException $e) {
            $this->response = $this->response->withStatus(404);
        } catch (Throwable $e) {
            $this->response = $this->response->withStatus(500);
-       } finally {
-           return $body;
+           throw new RuntimeException(
+               "Can't execute " . static::class
+             . ": " . $e->getMessage());
        }
+       return $body;
     }
 
    /**
