@@ -10,13 +10,14 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.1
+ * @version 1.1.1
  */
 
 namespace Seeren\Controller;
 
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
+use Seeren\View\Observer\SubjectInterface;
 
 /**
  * Interface for represente controller
@@ -24,19 +25,8 @@ use Seeren\View\ViewInterface;
  * @category Seeren
  * @package Controller
  */
-interface ControllerInterface
+interface ControllerInterface extends SubjectInterface
 {
-
-   /**
-    * Call
-    *
-    * @param string $name method name
-    * @param array $arguments method arguments
-    * @return null
-    *
-    * @throws BadMethodCallException
-    */
-   public function __call(string $name, array $arguments);
 
    /**
     * Get model

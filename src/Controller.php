@@ -10,15 +10,15 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.1
+ * @version 1.1.1
  */
 
 namespace Seeren\Controller;
 
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
-use ReflectionMethod;
-use BadMethodCallException;
+use Seeren\View\Observer\AbstractSubject;
+use Seeren\View\Observer\ObserverInterface;
 
 /**
  * Class for represente a controller
@@ -27,7 +27,7 @@ use BadMethodCallException;
  * @package Controller
  * @abstract
  */
-abstract class Controller
+abstract class Controller extends AbstractSubject
 {
 
    protected
@@ -57,27 +57,16 @@ abstract class Controller
    }
 
    /**
-    * Call
+    * Attach observer
     *
-    * @param string $name method name
-    * @param array $arguments method arguments
+    * @param ObserverInterface $observer updated on notification
     * @return null
-    *
-    * @throws BadMethodCallException if method not exists|not protected
     */
-   public final function __call(string $name, array $arguments = [])
+   public final function attach(ObserverInterface $observer)
    {
-       if (!method_exists($this, $name)) {
-           throw new BadMethodCallException(
-               "Can't call " . static::class . "::" . $name
-             . " do not exists");
+       if ($observer instanceof ViewInterface) {
+           parent::attach($observer);
        }
-       if (!(new ReflectionMethod($this, $name))->isProtected()) {
-           throw new BadMethodCallException(
-               "Can't call " . static::class . "::" . $name
-             . " have to be protected");
-       }
-       $this->{$name}(...$arguments);
    }
 
    /**
