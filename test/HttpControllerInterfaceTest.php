@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 namespace Seeren\Controller\Test;
@@ -18,7 +18,7 @@ namespace Seeren\Controller\Test;
 use Psr\Http\Message\ResponseInterface;
 use Seeren\Controller\ControllerInterface;
 use Seeren\Controller\HttpControllerInterface;
-use BadMethodCallException;
+use RuntimeException;
 
 /**
  * Class for test HttpControllerInterface
@@ -56,7 +56,7 @@ abstract class HttpControllerInterfaceTest extends ControllerInterfaceTest
        $controller = $this->getHttpControllerInterface();
        try {
            $controller->execute();
-       } catch (BadMethodCallException $e) {
+       } catch (RuntimeException $e) {
        } finally {
            $this->assertTrue(
                406 === $controller->getResponse()->getStatusCode()
