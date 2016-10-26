@@ -20,6 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\Model\Exception\ModelException;
+use Seeren\View\Exception\ViewException;
 use BadMethodCallException;
 use RuntimeException;
 use Throwable;
@@ -74,13 +75,14 @@ class HttpController extends Controller implements HttpControllerInterface
     {
        $body = "";
        try {
-           if (($contentType = $this->view->getContentType($this->request))) {
+           try {
+               $this->response = $this->response->withHeader(
+                   "content-type",
+                   $this->view->getContentType($this->request));
                $this->__call($this->request->getAttribute("action", ""));
-               $this->response = $this->response
-               ->withHeader("content-type", $contentType);
                $body = $this->view->render();
-           } else {
-                $this->response = $this->response->withStatus(406);
+           } catch (ViewException $e) {
+               $this->response = $this->response->withStatus(406);
            }
        } catch (BadMethodCallException $e) {
            $this->response = $this->response->withStatus(405);

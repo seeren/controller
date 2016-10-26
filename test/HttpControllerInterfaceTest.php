@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.1
+ * @version 1.1.1
  */
 
 namespace Seeren\Controller\Test;
@@ -59,7 +59,7 @@ abstract class HttpControllerInterfaceTest extends ControllerInterfaceTest
        } catch (BadMethodCallException $e) {
        } finally {
            $this->assertTrue(
-               405 === $controller->getResponse()->getStatusCode()
+               406 === $controller->getResponse()->getStatusCode()
            );
        }
    }

@@ -17,7 +17,7 @@ namespace Seeren\Controller\Test;
 
 use Seeren\Controller\HttpControllerInterface;
 use Seeren\Controller\HttpController;
-use Seeren\View\View;
+use Seeren\View\Test\MyView;
 use Seeren\Model\Model;
 use Seeren\Http\Stream\ServerRequestStream;
 use Seeren\Http\Uri\ServerRequestUri;
@@ -52,7 +52,7 @@ class HttpControllerTest extends HttpControllerInterfaceTest
                 (new ReflectionClass(ServerResponseStream::class))->newInstanceArgs([])
             ]),
                 (new ReflectionClass(Model::class))->newInstanceArgs([]),
-                (new ReflectionClass(View::class))->newInstanceArgs([])]
+                (new ReflectionClass(MyView::class))->newInstanceArgs([])]
         );
     }
 
