@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 namespace Seeren\Controller;
@@ -74,8 +74,14 @@ class HttpController extends Controller implements HttpControllerInterface
     {
        $body = "";
        try {
-           $this->__call($this->request->getAttribute("action", ""));
-           $body = $this->view->render();
+           if (($contentType = $this->view->getContentType($this->request))) {
+               $this->__call($this->request->getAttribute("action", ""));
+               $this->response = $this->response
+               ->withHeader("content-type", $contentType);
+               $body = $this->view->render();
+           } else {
+                $this->response = $this->response->withStatus(406);
+           }
        } catch (BadMethodCallException $e) {
            $this->response = $this->response->withStatus(405);
        } catch (ModelException $e) {
