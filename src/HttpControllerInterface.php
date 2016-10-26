@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.1.2
+ * @version 1.1.3
  */
 
 namespace Seeren\Controller;
@@ -27,12 +27,14 @@ use Psr\Http\Message\ResponseInterface;
 interface HttpControllerInterface extends ControllerInterface
 {
 
-    /**
-     * Execute controller
-     *
-     * @return string
-     */
-    public function execute(): string;
+   /**
+    * Execute controller
+    *
+    * @return string
+    * 
+    * @throws RuntimeException on execution exception or error
+    */
+   public function execute(): string;
 
    /**
     * Get response
