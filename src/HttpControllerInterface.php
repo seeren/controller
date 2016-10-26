@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 namespace Seeren\Controller;
@@ -31,9 +31,6 @@ interface HttpControllerInterface extends ControllerInterface
      * Execute controller
      *
      * @return string
-     *
-     * @throws BadMethodCallException
-     * @throws RuntimeException
      */
     public function execute(): string;
 

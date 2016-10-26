@@ -10,19 +10,19 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 namespace Seeren\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Seeren\Http\Response\Response;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\Model\Exception\ModelException;
 use Seeren\View\Exception\ViewException;
 use BadMethodCallException;
-use RuntimeException;
 use Throwable;
 
 /**
@@ -68,31 +68,29 @@ class HttpController extends Controller implements HttpControllerInterface
     * Execute controller
     *
     * @return string
-    * 
-    * @throws RuntimeException on faillure
     */
    public final function execute(): string
     {
        $body = "";
        try {
-           try {
-               $this->response = $this->response->withHeader(
-                   "content-type",
-                   $this->view->getContentType($this->request));
-               $this->__call($this->request->getAttribute("action", ""));
-               $body = $this->view->render();
-           } catch (ViewException $e) {
-               $this->response = $this->response->withStatus(406);
-           }
-       } catch (BadMethodCallException $e) {
-           $this->response = $this->response->withStatus(405);
-       } catch (ModelException $e) {
-           $this->response = $this->response->withStatus(404);
+           $this->response = $this->response->withHeader(
+               Response::HEADER_CONTENT_TYPE,
+               $this->view->getContentType($this->request));
+           $this->__call($this->request->getAttribute("action", ""));
+           $body = $this->view->render();
        } catch (Throwable $e) {
-           $this->response = $this->response->withStatus(500);
-           throw new RuntimeException(
-               "Can't execute " . static::class
-             . ": " . $e->getMessage());
+
+           trigger_error($e->getMessage(), E_USER_WARNING);
+
+           if ($e instanceof ViewException) {
+               $this->response = $this->response->withStatus(406);
+           } else if ($e instanceof BadMethodCallException) {
+               $this->response = $this->response->withStatus(405);
+           } else if ($e instanceof ModelException) {
+               $this->response = $this->response->withStatus(404);
+           } else {
+               $this->response = $this->response->withStatus(500);
+           }
        }
        return $body;
     }
