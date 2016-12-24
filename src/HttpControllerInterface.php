@@ -10,13 +10,14 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.1.3
+ * @version 1.2.1
  */
 
 namespace Seeren\Controller;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Seeren\Http\Request\ClientRequestInterface;
 
 /**
  * Interface for represente http controller
@@ -36,11 +37,25 @@ interface HttpControllerInterface extends ControllerInterface
     */
    public function execute(): string;
 
+
    /**
     * Get response
     *
     * @return ServerRequestInterface http response
     */
    public function getResponse(): ResponseInterface;
+
+   /**
+    * Consume service
+    *
+    * @param ClientRequestInterface $client request
+    * @param string $requestTarget request target
+    * @return ServerRequestInterface http response
+    * 
+    * @throws RuntimeException on unavailable target for context
+    */
+   public function consume(
+       ClientRequestInterface $client,
+       string $requestTarget): ResponseInterface;
 
 }
