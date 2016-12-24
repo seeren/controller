@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.6
+ * @version 1.2.1
  */
 
 namespace Seeren\Controller;
@@ -18,6 +18,7 @@ namespace Seeren\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Seeren\Http\Response\Response;
+use Seeren\Http\Request\ClientRequestInterface;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\Model\Exception\ModelException;
@@ -74,13 +75,12 @@ class HttpController extends Controller implements HttpControllerInterface
     */
    public final function execute(): string
     {
-       $body = "";
        try {
            $this->response = $this->response->withHeader(
                Response::HEADER_CONTENT_TYPE,
                $this->view->getContentType($this->request));
-           $this->__call($this->request->getAttribute("action", ""));
-           $body = $this->view->render();
+           $this->__call($this->request->getAttribute("action"));
+           return $this->view->render();
        } catch (Throwable $e) {
            if ($e instanceof ViewException) {
                $this->response = $this->response->withStatus(406);
@@ -94,7 +94,6 @@ class HttpController extends Controller implements HttpControllerInterface
            throw new RuntimeException(
                "Can't execute " . static::class . ": " .$e->getMessage());
        }
-       return $body;
     }
 
    /**
@@ -106,5 +105,30 @@ class HttpController extends Controller implements HttpControllerInterface
    {
        return $this->response;
    }
+
+   /**
+    * Consume service
+    *
+    * @param ClientRequestInterface $client request
+    * @param string $requestTarget request target
+    * @return ServerRequestInterface http response
+    * 
+    * @throws RuntimeException on unavailable target for context
+    */
+   public function consume(
+       ClientRequestInterface $client,
+       string $requestTarget): ResponseInterface
+    {
+       try {
+           return $client
+           ->withRequestTarget($requestTarget)
+           ->send()
+           ->getResponse();
+       } catch (RuntimeException $e) {
+           throw new RuntimeException(
+               "Can't " . static::class . ":consume "
+             . $requestTarget . ": " . $e->getMessage());
+       }
+    }
 
 }
