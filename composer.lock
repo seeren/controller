@@ -1,0 +1,229 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "d0cac100f041e09ffcbc2ef7800a49b2",
+    "content-hash": "2f85f58ddbeec8bceb1bf2b1e24e3403",
+    "packages": [
+        {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06 14:39:51"
+        },
+        {
+            "name": "seeren/http",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seeren/http.git",
+                "reference": "9b8cb4544446d97d27998f7487b5ed07c8dc4f9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seeren/http/zipball/9b8cb4544446d97d27998f7487b5ed07c8dc4f9b",
+                "reference": "9b8cb4544446d97d27998f7487b5ed07c8dc4f9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.1",
+                "psr/http-message": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seeren\\Http\\": "src/",
+                    "Seeren\\Http\\Test\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyril Ichti",
+                    "email": "consultant@seeren.fr",
+                    "homepage": "http://www.seeren.fr"
+                }
+            ],
+            "description": "Psr-7 implementation",
+            "time": "2017-01-24 17:21:16"
+        },
+        {
+            "name": "seeren/model",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seeren/model.git",
+                "reference": "816355bcb7d9d4b4eeeec809bad5f0c3bc6bc743"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seeren/model/zipball/816355bcb7d9d4b4eeeec809bad5f0c3bc6bc743",
+                "reference": "816355bcb7d9d4b4eeeec809bad5f0c3bc6bc743",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.1",
+                "seeren/view": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seeren\\Model\\": "src/",
+                    "Seeren\\Model\\Test\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyril Ichti",
+                    "email": "consultant@seeren.fr",
+                    "homepage": "http://www.seeren.fr"
+                }
+            ],
+            "description": "Store data in models as subjects",
+            "time": "2016-11-06 16:39:53"
+        },
+        {
+            "name": "seeren/view",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seeren/view.git",
+                "reference": "4a436c70c9f55133c94d3a9333a029fe6e0a29eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seeren/view/zipball/4a436c70c9f55133c94d3a9333a029fe6e0a29eb",
+                "reference": "4a436c70c9f55133c94d3a9333a029fe6e0a29eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.1",
+                "psr/http-message": "~1.0",
+                "seeren/http": "*",
+                "setasign/fpdf": "1.8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seeren\\View\\": "src/",
+                    "Seeren\\View\\Test\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyril Ichti",
+                    "email": "consultant@seeren.fr",
+                    "homepage": "http://www.seeren.fr"
+                }
+            ],
+            "description": "View as template manager using observer",
+            "time": "2017-02-26 14:58:39"
+        },
+        {
+            "name": "setasign/fpdf",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDF.git",
+                "reference": "2c68c9e6c034ac3187d25968790139a73184cdb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/2c68c9e6c034ac3187d25968790139a73184cdb1",
+                "reference": "2c68c9e6c034ac3187d25968790139a73184cdb1",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fpdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "no usage restriction"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Plathey",
+                    "email": "oliver@fpdf.org",
+                    "homepage": "http://fpdf.org/"
+                }
+            ],
+            "description": "FPDF is a PHP class which allows to generate PDF files with pure PHP. F from FPDF stands for Free: you may use it for any kind of usage and modify it to suit your needs.",
+            "homepage": "http://www.fpdf.org",
+            "keywords": [
+                "fpdf",
+                "pdf"
+            ],
+            "time": "2016-01-01 17:47:15"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.0.1"
+    },
+    "platform-dev": []
+}
