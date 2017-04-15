@@ -1,6 +1,7 @@
 {
     "name": "seeren/controller",
     "description": "Basics and http controllers for ressources and components",
+    "keywords": ["psr-7" ,"controller"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -20,8 +21,11 @@
     },
     "autoload": {
       "psr-4": {
-		"Seeren\\Controller\\": "src/",
-		"Seeren\\Controller\\Test\\": "test/"
+	"Seeren\\Controller\\": "src/",
+	"Seeren\\Controller\\Test\\": "test/"
       }
-   }
+   },
+    "require-dev": {
+        "phpunit/phpunit": "6.1"
+    }
 }
