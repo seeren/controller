@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.0.1
+ * @version 1.1.0
  */
 
 namespace Seeren\Controller\Test;
@@ -25,7 +25,7 @@ use Seeren\Controller\ControllerInterface;
  * @subpackage Test
  * @abstract
  */
-abstract class ControllerInterfaceTest extends \PHPUnit_Framework_TestCase
+abstract class ControllerInterfaceTest extends \PHPUnit\Framework\TestCase
 {
 
    /**
