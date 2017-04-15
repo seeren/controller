@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 namespace Seeren\Controller;
@@ -82,15 +82,13 @@ class HttpController extends Controller implements HttpControllerInterface
            $this->__call($this->request->getAttribute("action"));
            return $this->view->render();
        } catch (Throwable $e) {
-           if ($e instanceof ViewException) {
-               $this->response = $this->response->withStatus(406);
-           } else if ($e instanceof BadMethodCallException) {
-               $this->response = $this->response->withStatus(405);
-           } else if ($e instanceof ModelException) {
-               $this->response = $this->response->withStatus(404);
-           } else {
-               $this->response = $this->response->withStatus(500);
-           }
+           $this->response = $e instanceof ViewException
+                           ? $this->response->withStatus(406)
+                           : ($e instanceof BadMethodCallException
+                           ? $this->response->withStatus(405)
+                           : ($e instanceof ModelException)
+                           ? $this->response->withStatus(404)
+                           : $this->response->withStatus(500));
            throw new RuntimeException(
                "Can't execute " . static::class . ": " .$e->getMessage());
        }
