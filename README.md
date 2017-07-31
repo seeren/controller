@@ -14,7 +14,7 @@ composer require seeren/controller dev-master
 
 ## Controller Usage
 
-#### `Seeren\Container\Container`
+#### `Seeren\Controller\HttpController`
 Controllers allow you to build a response and a response body for an http action, for example, the following controller
 ```php
 class MyController extends HttpController
