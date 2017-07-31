@@ -10,17 +10,19 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.2.2
+ * @version 1.2.3
  */
 
 namespace Seeren\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Seeren\Http\Response\Response;
 use Seeren\Http\Request\ClientRequestInterface;
-use Seeren\Model\ModelInterface;
-use Seeren\View\ViewInterface;
+use Seeren\Http\Request\ServerRequest;
+use Seeren\Http\Response\Response;
+use Seeren\Http\Response\ServerResponse;
+use Seeren\Model\Model;
+use Seeren\View\View;
 use Seeren\Model\Exception\ModelException;
 use Seeren\View\Exception\ViewException;
 use BadMethodCallException;
@@ -33,7 +35,7 @@ use Throwable;
  * @category Seeren
  * @package Controller
  */
-class HttpController extends Controller implements HttpControllerInterface
+class HttpController extends AbstractController implements HttpControllerInterface
 {
 
    protected
@@ -56,43 +58,15 @@ class HttpController extends Controller implements HttpControllerInterface
     * @return null
     */
    public function __construct(
-       ServerRequestInterface $request,
-       ResponseInterface $response,
-       ModelInterface $model,
-       ViewInterface $view)
+       ServerRequest $request,
+       ServerResponse $response,
+       Model $model,
+       View $view)
    {
        parent::__construct($model, $view);
        $this->request = $request;
        $this->response = $response;
    }
-
-   /**
-    * Execute controller
-    *
-    * @return string
-    * 
-    * @throws RuntimeException on execution exception or error
-    */
-   public final function execute(): string
-    {
-       try {
-           $this->response = $this->response->withHeader(
-               Response::HEADER_CONTENT_TYPE,
-               $this->view->getContentType($this->request));
-           $this->__call($this->request->getAttribute("action"));
-           return $this->view->render();
-       } catch (Throwable $e) {
-           $this->response = $e instanceof ViewException
-                           ? $this->response->withStatus(406)
-                           : ($e instanceof BadMethodCallException
-                           ? $this->response->withStatus(405)
-                           : ($e instanceof ModelException)
-                           ? $this->response->withStatus(404)
-                           : $this->response->withStatus(500));
-           throw new RuntimeException(
-               "Can't execute " . static::class . ": " .$e->getMessage());
-       }
-    }
 
    /**
     * Get response
@@ -103,6 +77,44 @@ class HttpController extends Controller implements HttpControllerInterface
    {
        return $this->response;
    }
+
+   /**
+    * Get request
+    *
+    * @return ServerRequestInterface http request
+    */
+   public final function getRequest(): ServerRequestInterface
+   {
+       return $this->request;
+   }
+
+   /**
+    * Execute controller
+    *
+    * @return string
+    * 
+    * @throws RuntimeException on execution exception or error
+    */
+   public function execute(): string
+    {
+       try {
+           $this->response = $this->response->withHeader(
+               Response::HEADER_CONTENT_TYPE,
+               $this->view->getContentType($this->request));
+           $this->__call($this->request->getAttribute("action", ""));
+           return $this->view->render();
+       } catch (Throwable $e) {
+           $this->response = $e instanceof ViewException
+                           ? $this->response->withStatus(406)
+                           : ($e instanceof BadMethodCallException
+                           ? $this->response->withStatus(405)
+                           : ($e instanceof ModelException
+                           ? $this->response->withStatus(404)
+                           : $this->response->withStatus(500)));
+           throw new RuntimeException(
+               "Can't execute " . static::class . ": " .$e->getMessage());
+       }
+    }
 
    /**
     * Consume service
@@ -118,11 +130,8 @@ class HttpController extends Controller implements HttpControllerInterface
        string $requestTarget): ResponseInterface
     {
        try {
-           return $client
-           ->withRequestTarget($requestTarget)
-           ->send()
-           ->getResponse();
-       } catch (RuntimeException $e) {
+           return $client->withRequestTarget($requestTarget)->getResponse();
+       } catch (Throwable $e) {
            throw new RuntimeException(
                "Can't " . static::class . ":consume "
              . $requestTarget . ": " . $e->getMessage());
