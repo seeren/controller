@@ -1,8 +1,10 @@
 {
     "name": "seeren/controller",
-    "description": "Http controllers for ressources and components",
+    "description": "Manage action for http mesage",
     "keywords": [
-      "controller"],
+      "controller",
+      "httpcontroller"
+     ],
     "type": "library",
     "license": "MIT",
     "authors": [
