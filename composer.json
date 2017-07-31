@@ -1,7 +1,8 @@
 {
     "name": "seeren/controller",
-    "description": "Basics and http controllers for ressources and components",
-    "keywords": ["psr-7" ,"controller"],
+    "description": "Http controllers for ressources and components",
+    "keywords": [
+      "controller"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -15,17 +16,22 @@
     "require": {
       "php": ">=7.0.1",
       "psr/http-message": "~1.0",
-      "seeren/http": "*",
-      "seeren/model": "*",
-      "seeren/view": "*"
+      "seeren/http": "dev-master",
+      "seeren/model": "dev-master",
+      "seeren/view": "dev-master"
     },
-    "autoload": {
-      "psr-4": {
-	"Seeren\\Controller\\": "src/",
-	"Seeren\\Controller\\Test\\": "test/"
-      }
-   },
-    "require-dev": {
-        "phpunit/phpunit": "6.1"
-    }
+	"autoload" : {
+		"psr-4" : {
+			"Seeren\\Controller\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Seeren\\Controller\\Test\\" : "test/"
+		}
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "dev-master",
+		"satooshi/php-coveralls" : "dev-master"
+	}
 }
