@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link http://www.seeren.fr/ Seeren
- * @version 1.2.1
+ * @version 2.0.1
  */
 
 namespace Seeren\Controller;
@@ -29,21 +29,27 @@ interface HttpControllerInterface extends ControllerInterface
 {
 
    /**
+    * Get response
+    *
+    * @return ResponseInterface http response
+    */
+   public function getResponse(): ResponseInterface;
+
+   /**
+    * Get request
+    *
+    * @return ServerRequestInterface http request
+    */
+   public function getRequest(): ServerRequestInterface;
+
+   /**
     * Execute controller
     *
     * @return string
-    * 
+    *
     * @throws RuntimeException on execution exception or error
     */
    public function execute(): string;
-
-
-   /**
-    * Get response
-    *
-    * @return ServerRequestInterface http response
-    */
-   public function getResponse(): ResponseInterface;
 
    /**
     * Consume service
