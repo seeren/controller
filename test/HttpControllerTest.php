@@ -55,19 +55,15 @@ class HttpControllerTest extends AbstractHttpControllerTest
                (new ReflectionClass(ServerRequestUri::class))
                ->newInstanceArgs([]),
            ]),
-           (new ReflectionClass(ServerResponse::class))
-           ->newInstanceArgs([
-               (new ReflectionClass(ServerResponseStream::class))
-               ->newInstanceArgs([])
-           ]),
+           (new ReflectionClass(View::class))->newInstanceArgs([]),
            (new ReflectionClass(Model::class))->newInstanceArgs([]),
-           (new ReflectionClass(View::class))->newInstanceArgs([])
        ]);
    }
 
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @expectedException \BadMethodCallException
     */
    public function testCallBadMethodCallException()
@@ -79,6 +75,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
     * @covers \Seeren\Controller\AbstractController::getModel
+    * @covers \Seeren\Controller\AbstractController::setModel
     */
    public function testGetModel()
    {
@@ -88,6 +85,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\AbstractController::getView
     */
    public function testGetView()
@@ -98,6 +96,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::getRequest
     */
    public function testGetRequest()
@@ -108,6 +107,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::getResponse
     */
    public function testGetResponse()
@@ -118,6 +118,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::execute
     * @covers \Seeren\Controller\HttpController::getResponse
     */
@@ -129,6 +130,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\AbstractController::getModel
     * @covers \Seeren\Controller\AbstractController::getView
     * @covers \Seeren\Controller\HttpController::execute
@@ -143,6 +145,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::execute
     * @covers \Seeren\Controller\HttpController::getResponse
     */
@@ -159,6 +162,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::execute
     * @covers \Seeren\Controller\HttpController::getResponse
     */
@@ -175,6 +179,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::execute
     * @covers \Seeren\Controller\HttpController::getResponse
     */
@@ -188,6 +193,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::consume
     */
    public function testConsume()
@@ -198,6 +204,7 @@ class HttpControllerTest extends AbstractHttpControllerTest
    /**
     * @covers \Seeren\Controller\HttpController::__construct
     * @covers \Seeren\Controller\AbstractController::__construct
+    * @covers \Seeren\Controller\AbstractController::setModel
     * @covers \Seeren\Controller\HttpController::consume
     * @expectedException \RuntimeException
     */
@@ -217,8 +224,6 @@ class DummyHttpController extends HttpController
             (new ServerRequest(new ServerRequestStream, new ServerRequestUri))
             ->withHeader("Accept", "application/json")
             ->withAttribute("action", $action),
-            new ServerResponse(new ServerResponseStream),
-            new Model,
             new View
        );
     }

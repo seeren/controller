@@ -117,9 +117,8 @@ abstract class AbstractHttpControllerTest extends AbstractControllerTest
            ->withHeader("Accept", "application/json");
            $controller->__construct(
                $request,
-               $controller->getResponse(),
-               $controller->getModel(),
-               $controller->getView()
+               $controller->getView(),
+               $controller->getModel()
            );
            $controller->execute();
        } catch (RuntimeException $e) {
