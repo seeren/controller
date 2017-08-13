@@ -28,6 +28,7 @@ use Seeren\View\Exception\ViewException;
 use BadMethodCallException;
 use RuntimeException;
 use Throwable;
+use Seeren\Http\Stream\ServerResponseStream;
 
 /**
  * Class for represente http controller
@@ -52,20 +53,18 @@ class HttpController extends AbstractController implements HttpControllerInterfa
     * Construct HttpController
     *
     * @param ServerRequestInterface $request http server request
-    * @param ResponseInterface $response http response
-    * @param ModelInterface $model model
     * @param ViewInterface $view view
+    * @param ModelInterface $model model
     * @return null
     */
    public function __construct(
        ServerRequest $request,
-       ServerResponse $response,
-       Model $model,
-       View $view)
+       View $view,
+       Model $model = null)
    {
-       parent::__construct($model, $view);
+       parent::__construct($view, $model);
+       $this->response = new ServerResponse(new ServerResponseStream);
        $this->request = $request;
-       $this->response = $response;
    }
 
    /**
