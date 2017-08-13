@@ -21,7 +21,7 @@ class MyController extends HttpController
 {
     protected function get()
     {
-        $this->model->setData("hello", "world");
+        $this->model->setData("message", "Hello world")->notify();
     }
 }
 ```
@@ -29,7 +29,7 @@ Will provoke following response if the value of Accept is application/json with 
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
-{ "hello": "world"}
+{ "message": "Hello world"}
 ```
 Will provoke following response if the value of Accept is application/xml with GET method
 ```
@@ -37,7 +37,7 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <hello>world</world>
+    <message>Hello world</message>
 </root>
 ```
 Action is the action attribute of a psr-7 server request, corresponding to the http method or the action input value. Protected method corresponding to an action of a routed controler will be called to construct the response. To see how to route a controller check the [router](https://github.com/seeren/router)
