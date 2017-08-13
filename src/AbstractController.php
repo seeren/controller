@@ -10,7 +10,7 @@
  *
  * @copyright (c) Cyril Ichti <consultant@seeren.fr>
  * @link https://github.com/seeren/controller
- * @version 1.0.1
+ * @version 1.1.1
  */
 
 namespace Seeren\Controller;
@@ -18,6 +18,7 @@ namespace Seeren\Controller;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\View\Observer\AbstractSubject;
+use Seeren\Model\Model;
 
 /**
  * Class for represente a controller
@@ -40,18 +41,31 @@ class AbstractController extends AbstractSubject
 
    /**
     * Construct AbstractController
-    *      
-    * @param ModelInterface $model model
+    * 
     * @param ViewInterface $view view
+    * @param ModelInterface $model model
     * @return null
     */
    protected function __construct(
-       ModelInterface $model,
-       ViewInterface $view)
+       ViewInterface $view,
+       ModelInterface $model = null)
+   {
+       $this->view = $view;
+       if ($model) {
+           $this->setModel($model);
+       }
+   }
+
+   /**
+    * Set model
+    *
+    * @return ModelInterfacemodel
+    */
+   private final function setModel(ModelInterface $model): ModelInterface
    {
        $this->model = $model;
-       $this->view = $view;
        $this->model->attach($this->view);
+       return $model;
    }
 
    /**
@@ -61,9 +75,9 @@ class AbstractController extends AbstractSubject
     */
    public final function getModel(): ModelInterface
    {
-       return $this->model;
+       return $this->model ? $this->model : $this->setModel(new Model);
    }
-   
+
    /**
     * Get view
     *
