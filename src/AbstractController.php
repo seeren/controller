@@ -15,10 +15,11 @@
 
 namespace Seeren\Controller;
 
+use Seeren\Model\Model;
 use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 use Seeren\View\Observer\AbstractSubject;
-use Seeren\Model\Model;
+use Seeren\View\View;
 
 /**
  * Class for represente a controller
@@ -47,10 +48,10 @@ class AbstractController extends AbstractSubject
     * @return null
     */
    protected function __construct(
-       ViewInterface $view,
+       ViewInterface $view = null,
        ModelInterface $model = null)
    {
-       $this->view = $view;
+       $this->view = $view ? $view : new View;
        if ($model) {
            $this->setModel($model);
        }
