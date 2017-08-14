@@ -21,7 +21,7 @@ class MyController extends HttpController
 {
     protected function get()
     {
-        $this->model->setData("message", "Hello world")->notify();
+        $this->getModel()->setData("message", "Hello world")->notify();
     }
 }
 ```
