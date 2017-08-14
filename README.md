@@ -1,5 +1,5 @@
 # controller
- [![Build Status](https://travis-ci.org/seeren/controller.svg?branch=master)](https://travis-ci.org/seeren/controller) [![Coverage Status](https://coveralls.io/repos/github/seeren/controller/badge.svg?branch=master)](https://coveralls.io/github/seeren/controller?branch=master) [![Packagist](https://img.shields.io/packagist/dt/seeren/controller.svg)](https://packagist.org/packages/seeren/controller/stats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a0463fb5a084be5bda68e4e36d7c7ac)](https://www.codacy.com/app/seeren/controller?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seeren/controller&amp;utm_campaign=Badge_Grade) [![Packagist](https://img.shields.io/packagist/v/seeren/controller.svg)](https://packagist.org/packages/seeren/controller#) [![Packagist](https://img.shields.io/packagist/l/seeren/log.svg)](LICENSE)
+ [![Build Status](https://travis-ci.org/seeren/controller.svg?branch=master)](https://travis-ci.org/seeren/controller) [![Coverage Status](https://coveralls.io/repos/github/seeren/controller/badge.svg?branch=master)](https://coveralls.io/github/seeren/controller?branch=master) [![Packagist](https://img.shields.io/packagist/dt/seeren/controller.svg)](https://packagist.org/packages/seeren/controller/stats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a0463fb5a084be5bda68e4e36d7c7ac)](https://www.codacy.com/app/seeren/controller?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seeren/controller&amp;utm_campaign=Badge_Grade) [![Packagist](https://img.shields.io/packagist/v/seeren/controller.svg)](https://packagist.org/packages/seeren/controller#) [![Packagist](https://img.shields.io/packagist/l/seeren/controller.svg)](LICENSE)
 
 **Manage action for http mesage**
 
@@ -41,6 +41,23 @@ Content-Type: application/xml
 </root>
 ```
 Action is the action attribute of a psr-7 server request, corresponding to the http method or the action input value. Protected method corresponding to an action of a routed controler will be called to construct the response. To see how to route a controller check the [router](https://github.com/seeren/router)
+
+#### Resolve dependencies
+Using controllers with application or project package you can resolve dependencies without using a service provider. you have to declare your dependencies in the constructor argument. If you use constructor, you have to declare provide a ServerRequest at the parent constructor.
+```php
+class MyController extends HttpController
+{
+    public function __construct(ServerRequest $request, JSONView $view)
+    {
+        parent::__construct($request, $view);
+    }
+    protected function get ()
+    {
+        $this->model->setData("message", "Hello world")->notify();
+    }
+}
+```
+All dependencies will be resolved deeply and they will be shared, for example il a dependency need ServerRequest at construction, the one resolved in the controller will be injected and shared to all dependencies who need the request.
 
 ## Run Unit tests
 Install dependencies
