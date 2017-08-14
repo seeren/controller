@@ -42,8 +42,8 @@ Content-Type: application/xml
 ```
 Action is the action attribute of a psr-7 server request, corresponding to the http method or the action input value. Protected method corresponding to an action of a routed controler will be called to construct the response. To see how to route a controller check the [router](https://github.com/seeren/router)
 
-#### Resolve dependencies
-Using controllers with [application](https://github.com/seeren/application) or [project](https://github.com/seeren/project) package you can resolve dependencies without using a [service provider](https://github.com/seeren/container). you have to declare your dependencies in the constructor argument. If you use constructor, you have to declare provide a ServerRequest at the parent constructor.
+### Resolve dependencies
+Using controllers with [application](https://github.com/seeren/application) or [project](https://github.com/seeren/project) package you can resolve dependencies without using a [service provider](https://github.com/seeren/container). you have to declare your dependencies in the constructor argument. If you use constructor, you have to declare and provide a ServerRequest at the parent constructor.
 ```php
 class MyController extends HttpController
 {
