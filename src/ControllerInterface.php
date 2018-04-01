@@ -1,14 +1,13 @@
 <?php
 
 /**
- * This file contain Seeren\Controller\ControllerInterface interface
  *     __
  *    / /__ __ __ __ __ __
  *   / // // // // // // /
  *  /_// // // // // // /
  *    /_//_//_//_//_//_/
  *
- * @copyright (c) Cyril Ichti <consultant@seeren.fr>
+ * @author (c) Cyril Ichti <consultant@seeren.fr>
  * @link https://github.com/seeren/controller
  * @version 2.0.1
  */
@@ -31,7 +30,7 @@ interface ControllerInterface extends SubjectInterface
    /**
     * Get model
     *
-    * @return ModelInterfacemodel
+    * @return ModelInterface
     */
    public function getModel(): ModelInterface;
 

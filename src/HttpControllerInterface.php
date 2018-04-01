@@ -1,14 +1,13 @@
 <?php
 
 /**
- * This file contain Seeren\Controller\HttpControllerInterface interface
  *     __
  *    / /__ __ __ __ __ __
  *   / // // // // // // /
  *  /_// // // // // // /
  *    /_//_//_//_//_//_/
  *
- * @copyright (c) Cyril Ichti <consultant@seeren.fr>
+ * @author (c) Cyril Ichti <consultant@seeren.fr>
  * @link https://github.com/seeren/controller
  * @version 2.0.1
  */
@@ -47,7 +46,7 @@ interface HttpControllerInterface extends ControllerInterface
     *
     * @return string
     *
-    * @throws RuntimeException on execution exception or error
+    * @throws \RuntimeException on execution exception or error
     */
    public function execute(): string;
 
@@ -58,7 +57,7 @@ interface HttpControllerInterface extends ControllerInterface
     * @param string $requestTarget request target
     * @return ServerRequestInterface http response
     * 
-    * @throws RuntimeException on unavailable target for context
+    * @throws \RuntimeException on unavailable target for context
     */
    public function consume(
        ClientRequestInterface $client,

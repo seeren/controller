@@ -1,14 +1,13 @@
 <?php
 
 /**
- * This file contain Seeren\Controller\Test\AbstractHttpControllerTest class
  *     __
  *    / /__ __ __ __ __ __
  *   / // // // // // // /
  *  /_// // // // // // /
  *    /_//_//_//_//_//_/
  *
- * @copyright (c) Cyril Ichti <consultant@seeren.fr>
+ * @author (c) Cyril Ichti <consultant@seeren.fr>
  * @link https://github.com/seeren/controller
  * @version 2.0.1
  */
@@ -44,9 +43,8 @@ abstract class AbstractHttpControllerTest extends AbstractControllerTest
    abstract protected function getHttpControllerInterface(): HttpControllerInterface;
 
    /**
-    * Get ControllerInterface
-    *
-    * @return ControllerInterface controller
+    * {@inheritDoc}
+    * @see \Seeren\Controller\Test\AbstractControllerTest::getControllerInterface()
     */
    protected function getControllerInterface(): ControllerInterface
    {
@@ -54,9 +52,7 @@ abstract class AbstractHttpControllerTest extends AbstractControllerTest
    }
 
    /**
-    * Get ClientRequestInterface
-    *
-    * @return ClientRequestInterface request
+    * @return ClientRequestInterface
     */
    protected function getClientRequest(): ClientRequestInterface
    {

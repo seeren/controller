@@ -31,21 +31,19 @@ class AbstractController extends AbstractSubject
 {
 
    protected
+
        /**
-        * @var ModelInterface model
+        * @var ModelInterface
         */
        $model,
        /**
-        * @var ViewInterface view
+        * @var ViewInterface
         */
        $view;
 
    /**
-    * Construct AbstractController
-    * 
     * @param ViewInterface $view view
     * @param ModelInterface $model model
-    * @return null
     */
    protected function __construct(
        ViewInterface $view = null,
@@ -58,9 +56,7 @@ class AbstractController extends AbstractSubject
    }
 
    /**
-    * Set model
-    *
-    * @return ModelInterfacemodel
+    * @return ModelInterface
     */
    private final function setModel(ModelInterface $model): ModelInterface
    {
@@ -70,9 +66,8 @@ class AbstractController extends AbstractSubject
    }
 
    /**
-    * Get model
-    *
-    * @return ModelInterfacemodel
+    * {@inheritDoc}
+    * @see \Seeren\Controller\ControllerInterface::getModel()
     */
    public final function getModel(): ModelInterface
    {
@@ -80,9 +75,8 @@ class AbstractController extends AbstractSubject
    }
 
    /**
-    * Get view
-    *
-    * @return ViewInterface
+    * {@inheritDoc}
+    * @see \Seeren\Controller\ControllerInterface::getView()
     */
    public final function getView(): ViewInterface
    {
