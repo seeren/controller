@@ -3,5 +3,5 @@
 /vendor/
 /.buildpath
 /.project
-/composer/lock
+/composer.lock
 /phpunit.xml
