@@ -15,7 +15,6 @@
 namespace Seeren\Controller\Test;
 
 use Seeren\Controller\ControllerInterface;
-use Seeren\Model\ModelInterface;
 use Seeren\View\ViewInterface;
 
 /**
@@ -42,18 +41,6 @@ abstract class AbstractControllerTest extends \PHPUnit\Framework\TestCase
    public function testCallBadMethodCallException()
    {
        $this->getControllerInterface()->foo();
-   }
-
-   /**
-    * Test get model
-    */
-   public function testGetModel()
-   {
-       $this->assertTrue(
-           $this
-           ->getControllerInterface()
-           ->getModel() instanceof ModelInterface
-       );
    }
 
    /**
