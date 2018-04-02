@@ -17,6 +17,7 @@
 	"require" : {
 		"php" : ">=7.2.0",
 		"psr/http-message" : "~1.0",
+		"seeren/container" : "dev-master",
 		"seeren/http" : "dev-master",
 		"seeren/model" : "dev-master",
 		"seeren/view" : "dev-master"
