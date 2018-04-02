@@ -16,7 +16,7 @@ namespace Seeren\Controller;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Seeren\Http\Request\ClientRequestInterface;
+use Seeren\Container\Container;
 
 /**
  * Interface for represente http controller
@@ -44,23 +44,12 @@ interface HttpControllerInterface extends ControllerInterface
    /**
     * Execute controller
     *
+    * @param \Seeren\Container\Container $container
+    * 
     * @return string
     *
     * @throws \RuntimeException on execution exception or error
     */
-   public function execute(): string;
-
-   /**
-    * Consume service
-    *
-    * @param ClientRequestInterface $client request
-    * @param string $requestTarget request target
-    * @return ServerRequestInterface http response
-    * 
-    * @throws \RuntimeException on unavailable target for context
-    */
-   public function consume(
-       ClientRequestInterface $client,
-       string $requestTarget): ResponseInterface;
+   public function execute(Container $container = null): string;
 
 }
