@@ -4,7 +4,7 @@
 **Manage action for http mesage**
 
 ## Features
-* Controle http message
+* Build response view
 
 ## Installation
 Require this package with [composer](https://getcomposer.org/)
@@ -12,26 +12,27 @@ Require this package with [composer](https://getcomposer.org/)
 composer require seeren/controller dev-master
 ```
 
-## Controller Usage
+## Usage
 
 #### `Seeren\Controller\HttpController`
-Controllers allow you to build a response and a response body for an http action, for example, the following controller
+Create http controller and actions
 ```php
-class MyController extends HttpController
+class Controller extends HttpController
 {
-    protected function get()
+    public function get(Model $model)
     {
-        $this->getModel()->setData("message", "Hello world")->notify();
+        $this->getView()->update(
+            $model->setData("message", "Hello world")
+        );
     }
 }
 ```
-Will provoke following response if the value of Accept is application/json with GET method
+Controller build views
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json
 { "message": "Hello world"}
 ```
-Will provoke following response if the value of Accept is application/xml with GET method
 ```
 HTTP/1.1 200 OK
 Content-Type: application/xml
@@ -40,46 +41,21 @@ Content-Type: application/xml
     <message>Hello world</message>
 </root>
 ```
-Action is the action attribute of a psr-7 server request, corresponding to the http method or the action input value. Protected method corresponding to an action of a routed controler will be called to construct the response. To see how to route a controller check the [router](https://github.com/seeren/router)
 
-### Resolve dependencies
-Using controllers with [application](https://github.com/seeren/application) or [project](https://github.com/seeren/project) package you can resolve dependencies without using a [service provider](https://github.com/seeren/container). you have to declare your dependencies in the constructor argument. If you use constructor, you have to declare and provide a ServerRequest at the parent constructor.
-```php
-class MyController extends HttpController
-{
-    public function __construct(ServerRequest $request, JSONView $view)
-    {
-        parent::__construct($request, $view);
-    }
-    protected function get ()
-    {
-        $this->model->setData("message", "Hello world")->notify();
-    }
-}
-```
-All dependencies will be resolved deeply and they will be shared, for example il a dependency need ServerRequest at construction, the one resolved in the controller will be injected and shared to all dependencies who need the request.
+See [how to route a controller](https://github.com/seeren/router)
 
-## Run Unit tests
-Install dependencies
-```
-composer update
-```
-Run [phpunit](https://phpunit.de/) with [Xdebug](https://xdebug.org/) enabled and [OPcache](http://php.net/manual/fr/book.opcache.php) disabled for coverage
+## Run Tests
+Run [phpunit](https://phpunit.de/) with [Xdebug](https://xdebug.org/) enable and [OPcache](http://php.net/manual/fr/book.opcache.php) disable
 ```
 ./vendor/bin/phpunit
 ```
+
 ## Run Coverage
-Install dependencies
+Run [coveralls](https://coveralls.io/)
 ```
-composer update
-```
-Run [coveralls](https://coveralls.io/) for check coverage
-```
-./vendor/bin/coveralls -v
+./vendor/bin/php-coveralls -v
 ```
 
-##  Contributors
-* **Cyril Ichti** - *Initial work* - [seeren](https://github.com/seeren)
 
 ## License
 This project is licensed under the **MIT License** - see the [license](LICENSE) file for details.
