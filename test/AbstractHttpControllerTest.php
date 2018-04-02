@@ -18,10 +18,6 @@ use Seeren\Controller\ControllerInterface;
 use Seeren\Controller\HttpControllerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Seeren\Http\Request\ClientRequest;
-use Seeren\Http\Uri\Uri;
-use Seeren\Http\Request\ClientRequestInterface;
-use ReflectionClass;
 use RuntimeException;
 
 /**
@@ -49,19 +45,6 @@ abstract class AbstractHttpControllerTest extends AbstractControllerTest
    protected function getControllerInterface(): ControllerInterface
    {
        return $this->getHttpControllerInterface();
-   }
-
-   /**
-    * @return ClientRequestInterface
-    */
-   protected function getClientRequest(): ClientRequestInterface
-   {
-       return (new ReflectionClass(ClientRequest::class))
-       ->newInstanceArgs([
-           "GET",
-           (new ReflectionClass(Uri::class))
-           ->newInstanceArgs(["https", "github.com"])
-       ]);
    }
 
    /**
@@ -113,37 +96,12 @@ abstract class AbstractHttpControllerTest extends AbstractControllerTest
            ->withHeader("Accept", "application/json");
            $controller->__construct(
                $request,
-               $controller->getView(),
-               $controller->getModel()
+               $controller->getView()
            );
            $controller->execute();
        } catch (RuntimeException $e) {
        }
        $this->assertTrue($controller->getResponse()->getStatusCode() === 405);
-   }
-
-   /**
-    * Test consume
-    */
-   public function testConsume()
-   {
-       $this->assertTrue(
-           $this->getHttpControllerInterface()->consume(
-               $this->getClientRequest(),
-               "seeren"
-           ) instanceof ResponseInterface
-       );
-   }
-
-   /**
-    * Test consume RuntimeException
-    */
-   public function testConsumeRuntimeException()
-   {
-       $this->getHttpControllerInterface()->consume(
-           $this->getClientRequest(),
-           "bar target"
-       );
    }
 
 }
