@@ -1,61 +1,52 @@
-# controller
- [![Build Status](https://travis-ci.org/seeren/controller.svg?branch=master)](https://travis-ci.org/seeren/controller) [![Coverage Status](https://coveralls.io/repos/github/seeren/controller/badge.svg?branch=master)](https://coveralls.io/github/seeren/controller?branch=master) [![Packagist](https://img.shields.io/packagist/dt/seeren/controller.svg)](https://packagist.org/packages/seeren/controller/stats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a0463fb5a084be5bda68e4e36d7c7ac)](https://www.codacy.com/app/seeren/controller?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seeren/controller&amp;utm_campaign=Badge_Grade) [![Packagist](https://img.shields.io/packagist/v/seeren/controller.svg)](https://packagist.org/packages/seeren/controller#) [![Packagist](https://img.shields.io/packagist/l/seeren/controller.svg)](LICENSE)
+# Seeren\Controller
 
-**Manage action for http mesage**
+[![Build Status](https://travis-ci.org/seeren/controller.svg?branch=master)](https://travis-ci.org/seeren/controller) [![Coverage Status](https://coveralls.io/repos/github/seeren/controller/badge.svg?branch=master)](https://coveralls.io/github/seeren/controller?branch=master) [![Packagist](https://img.shields.io/packagist/dt/seeren/controller.svg)](https://packagist.org/packages/seeren/controller/stats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a0463fb5a084be5bda68e4e36d7c7ac)](https://www.codacy.com/app/seeren/controller?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seeren/controller&amp;utm_campaign=Badge_Grade) [![Packagist](https://img.shields.io/packagist/v/seeren/controller.svg)](https://packagist.org/packages/seeren/controller#) [![Packagist](https://img.shields.io/packagist/l/seeren/controller.svg)](LICENSE)
 
-## Features
-* Build response view
+Manage action for http message
 
 ## Installation
-Require this package with [composer](https://getcomposer.org/)
-```
-composer require seeren/controller dev-master
+
+```bash
+composer require seeren/controller
 ```
 
-## Usage
+## Seeren\Controller\JsonController
 
-#### `Seeren\Controller\HttpController`
-Create http controller and actions
+Retrieve PSR-7 Response for JSON format
+
 ```php
-class Controller extends HttpController
-{
-    public function get(Model $model)
-    {
-        $this->getView()->update(
-            $model->setData("message", "Hello world")
-        );
-    }
-}
-```
-Controller build views
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-{ "message": "Hello world"}
-```
-```
-HTTP/1.1 200 OK
-Content-Type: application/xml
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-    <message>Hello world</message>
-</root>
+use Seeren\Controller\JsonController;
+
+$controller = new JsonController();
+$response = $controller->render(['foo' => 'bar']);
 ```
 
-See [how to route a controller](https://github.com/seeren/router)
+## Seeren\Controller\MarkupController
 
-## Run Tests
-Run [phpunit](https://phpunit.de/) with [Xdebug](https://xdebug.org/) enable and [OPcache](http://php.net/manual/fr/book.opcache.php) disable
-```
-./vendor/bin/phpunit
+Retrieve PSR-7 Response for HTML and others markup format
+
+```php
+use Seeren\Controller\MarkupController;
+
+$controller = new MarkupController();
+$response = $controller->render('template.html.php', [
+        'title' => 'Hello World'
+]);
 ```
 
-## Run Coverage
-Run [coveralls](https://coveralls.io/)
-```
-./vendor/bin/php-coveralls -v
+By default, log folder is in `/templates`
+
+```bash
+project/
+└─ templates/
 ```
 
+Template use PHP syntax and values are sanitized by default
+
+```php
+<h1><?= $title ?></h1>
+```
 
 ## License
-This project is licensed under the **MIT License** - see the [license](LICENSE) file for details.
+
+This project is licensed under the MIT License
