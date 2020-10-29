@@ -1,39 +1,38 @@
 {
-	"name" : "seeren/controller",
-	"description" : "Manage action for http mesage",
-	"keywords" : [
-		"controller",
-		"http"
-	],
-	"type" : "library",
-	"license" : "MIT",
-	"authors" : [{
-			"name" : "Cyril Ichti",
-			"email" : "consultant@seeren.fr",
-			"homepage" : "http://www.seeren.fr"
-		}
-	],
-	"minimum-stability" : "dev",
-	"require" : {
-		"php" : ">=7.2.0",
-		"psr/http-message" : "~1.0",
-		"seeren/container" : "dev-master",
-		"seeren/http" : "dev-master",
-		"seeren/model" : "dev-master",
-		"seeren/view" : "dev-master"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Seeren\\Controller\\" : "src/"
-		}
-	},
-	"autoload-dev" : {
-		"psr-4" : {
-			"Seeren\\Controller\\Test\\" : "test/"
-		}
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "7.0.2",
-		"satooshi/php-coveralls" : "2.0.0"
-	}
+  "name": "seeren/controller",
+  "description": "Manage action for http message",
+  "keywords": [
+    "controller",
+    "http"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cyril Ichti",
+      "email": "consultant@seeren.fr",
+      "homepage": "https://github.com/seeren/controller"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "psr/http-message": "~1.0",
+    "seeren/container": "~2.0",
+    "seeren/http": "~3.1",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seeren\\Controller\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Seeren\\Controller\\Test\\": "test/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9.4.0",
+    "php-coveralls/php-coveralls": "v2.4.1"
+  }
 }
