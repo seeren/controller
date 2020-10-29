@@ -3,10 +3,9 @@
 namespace Seeren\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Interface to represent a controller
+ * Interface to represent a markup controller
  *
  *     __
  *    / /__ __ __ __ __ __
@@ -16,23 +15,20 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @package Seeren\Controller
  */
-interface ControllerInterface
+interface MarkupControllerInterface extends ControllerInterface
 {
 
     /**
-     * @return ServerRequestInterface
-     */
-    public function getRequest(): ServerRequestInterface;
-
-    /**
+     * @param string $template
+     * @param array $vars
      * @param int $status
      * @param array $headers
-     * @param string $body
      * @return ResponseInterface
      */
-    public function send(
+    public function render(
+        string $template,
+        array $vars,
         int $status,
-        array $headers,
-        string $body): ResponseInterface;
+        array $headers): ResponseInterface;
 
 }
