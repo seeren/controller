@@ -15,11 +15,10 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
-    "psr/http-message": "~1.0",
-    "seeren/container": "~2.0",
-    "seeren/http": "~3.1",
-    "ext-json": "*"
+    "php": ">=8.0.1",
+    "psr/http-message": "~1.0.1",
+    "seeren/container": "^3.0",
+    "seeren/http": "^4.0"
   },
   "autoload": {
     "psr-4": {
@@ -32,7 +31,14 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "9.4.0",
-    "php-coveralls/php-coveralls": "v2.4.1"
+    "phpunit/phpunit": "^9.5",
+    "php-coveralls/php-coveralls": "^v2.5.2"
+  },
+  "scripts": {
+    "start": "php -S localhost:8000 -t public",
+    "test": [
+      "@putenv XDEBUG_MODE=coverage",
+      "phpunit --color=always --coverage-text"
+    ]
   }
 }
