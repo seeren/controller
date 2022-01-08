@@ -4,24 +4,20 @@ namespace Seeren\Controller\Test;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Seeren\Controller\MarkupController;
+use Seeren\Controller\HTMLController;
 
-class MarkupControllerTest extends TestCase
+class HTMLControllerTest extends TestCase
 {
 
-    /**
-     * @param bool $provide
-     * @return MarkupController
-     */
-    public function getMock(bool $provide = true): MarkupController
+    public function getMock(bool $provide = true): HTMLController
     {
-        return new MarkupController($provide ? __DIR__ . '/templates/' : null);
+        return new HTMLController($provide ? __DIR__ . '/templates/' : null);
     }
 
     /**
      * @runInSeparateProcess
-     * @covers \Seeren\Controller\MarkupController::__construct
-     * @covers \Seeren\Controller\MarkupController::render
+     * @covers \Seeren\Controller\HTMLController::__construct
+     * @covers \Seeren\Controller\HTMLController::render
      * @covers \Seeren\Controller\Controller::__construct
      * @covers \Seeren\Controller\Controller::send
      */
@@ -34,8 +30,8 @@ class MarkupControllerTest extends TestCase
     }
 
     /**
-     * @covers \Seeren\Controller\MarkupController::__construct
-     * @covers \Seeren\Controller\MarkupController::render
+     * @covers \Seeren\Controller\HTMLController::__construct
+     * @covers \Seeren\Controller\HTMLController::render
      * @covers \Seeren\Controller\Controller::__construct
      * @covers \Seeren\Controller\Controller::send
      */

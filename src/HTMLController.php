@@ -5,38 +5,15 @@ namespace Seeren\Controller;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Seeren\Http\Message\MessageInterface;
-use Seeren\Http\Response\Response;
 
-/**
- * Class to represent a markup controller
- *
- *     __
- *    / /__ __ __ __ __ __
- *   / // // // // // // /
- *  /_// // // // // // /
- *    /_//_//_//_//_//_/
- *
- * @package Seeren\Controller
- */
-class MarkupController extends Controller implements MarkupControllerInterface
+class HTMLController extends Controller implements HTMLControllerInterface
 {
 
-    /**
-     * @var string
-     */
     private string $includePath;
 
-    /**
-     * @param string|null $includePath
-     * @param string $charset
-     * @param string $version
-     */
-    public function __construct(
-        string $includePath = null,
-        string $charset = 'text/html; charset=utf-8',
-        string $version = MessageInterface::VERSION_1)
+    public function __construct(string $includePath = null)
     {
-        parent::__construct($version, [Response::HEADER_CONTENT_TYPE => $charset]);
+        parent::__construct([MessageInterface::HEADER_CONTENT_TYPE => 'text/html; charset=utf-8']);
         $this->includePath = rtrim($includePath ??
             dirname(__FILE__, 5)
             . DIRECTORY_SEPARATOR
@@ -45,14 +22,6 @@ class MarkupController extends Controller implements MarkupControllerInterface
         );
     }
 
-    /**
-     * @param string $template
-     * @param array|null $vars
-     * @param int|null $status
-     * @param array|null $headers
-     * @return ResponseInterface
-     * @throws InvalidArgumentException
-     */
     public final function render(
         string $template,
         array $vars = [],

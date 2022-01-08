@@ -9,9 +9,6 @@ use stdClass;
 class JsonControllerTest extends TestCase
 {
 
-    /**
-     * @return JsonController
-     */
     public function getMock(): JsonController
     {
         return new JsonController();
@@ -41,7 +38,7 @@ class JsonControllerTest extends TestCase
     public function testRenderJSONSerializable(): void
     {
         $serializable = new stdClass();
-        $serializable->foo = "bar";
+        $serializable->foo = 'bar';
         $this->expectOutputString(json_encode($serializable));
         $this->getMock()->render($serializable);
     }

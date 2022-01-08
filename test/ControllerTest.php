@@ -11,12 +11,9 @@ require __DIR__ . '/context.php';
 class ControllerTest extends TestCase
 {
 
-    /**
-     * @return Controller
-     */
     public function getMock(): Controller
     {
-        return new Controller('1.1', []);
+        return new Controller([]);
     }
 
     /**
@@ -27,7 +24,6 @@ class ControllerTest extends TestCase
     {
         $this->assertInstanceOf(ServerRequestInterface::class, $this->getMock()->getRequest());
     }
-
 
     /**
      * @runInSeparateProcess

@@ -31,5 +31,5 @@ function filter_input(
             return 'path';
         }
     }
-    return \filter_input($type, $key, $flag, $options);
+    return null;
 }

@@ -2,20 +2,10 @@
 
 namespace Seeren\Controller;
 
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Interface to represent a markup controller
- *
- *     __
- *    / /__ __ __ __ __ __
- *   / // // // // // // /
- *  /_// // // // // // /
- *    /_//_//_//_//_//_/
- *
- * @package Seeren\Controller
- */
-interface MarkupControllerInterface extends ControllerInterface
+interface HTMLControllerInterface extends ControllerInterface
 {
 
     /**
@@ -24,6 +14,8 @@ interface MarkupControllerInterface extends ControllerInterface
      * @param int $status
      * @param array $headers
      * @return ResponseInterface
+     *
+     * @throws InvalidArgumentException for template not found
      */
     public function render(
         string $template,
