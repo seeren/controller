@@ -33,7 +33,9 @@ class HTMLController extends Controller implements HTMLControllerInterface
             throw new InvalidArgumentException('Template "' . $filename . '" cannot be found');
         }
         foreach ($vars as &$value) {
-            $value = filter_var($value, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if (is_string($value)) {
+                $value = filter_var($value, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            }
         }
         extract($vars);
         unset($vars);
